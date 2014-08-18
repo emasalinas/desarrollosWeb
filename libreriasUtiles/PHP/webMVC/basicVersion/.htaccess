@@ -1,0 +1,19 @@
+# Opcioens
+Options -MultiViews
+
+# Activacion de Redireccion
+RewriteEngine On
+
+# Disallows others to look directly into /public/ folder
+Options -Indexes
+
+"Marcamos la URL de la Redireccion
+RewriteBase /webMVC/
+
+"Creamos las condiciones de Redireccion
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+
+"Escribimos la regla de la Redireccion
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
