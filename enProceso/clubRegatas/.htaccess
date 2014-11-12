@@ -4,7 +4,7 @@ RewriteEngine On
 
 Options -Indexes
 
-RewriteBase /clubRegatas/
+RewriteBase /clubregatas/
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f

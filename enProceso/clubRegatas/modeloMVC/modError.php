@@ -32,10 +32,7 @@ class modError {
 	/*--------------------------------------------------------------*/
 	public function mCargarCanciones(){
 		
-		$this->vQueryString		= 'SELECT id, artist, track, link FROM song';
-		$clQuery	= $this->clMysqliConn->mRealizaConsulta($this->vQueryString);
-		$arrQuery	= $this->clMysqliConn->mCrearArray();
-		return $arrQuery;	
+		echo 'Pagina de error';
 		
 	}
 }
