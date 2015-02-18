@@ -1,8 +1,8 @@
 <?php
 /*********************************************************************
-* Codigo del archivo	: PHP_010_vistaMVC
-* Nombre del archivo	: vistaMVC.php
-* Objetivo del archivo	: Vista del MVC
+* Codigo del archivo	: PHP_010_vistaSynchro
+* Nombre del archivo	: visSynchro.php
+* Objetivo del archivo	: Vista del Synchro
 *
 * Categoria				: PHP
 * Paquete				: 010

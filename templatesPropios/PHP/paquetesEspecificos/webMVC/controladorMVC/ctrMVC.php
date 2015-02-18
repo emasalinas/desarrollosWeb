@@ -16,6 +16,9 @@ class ctrMVC extends clControlador{
 	private $nomConstantes;
 	private $nomEntidades;
 	private $nomModelo;
+	private $nomVista;
+	
+	public $entMVC;
 	
 	/*--------------------------------------------------------------*/
 	// Metodo de carga del archivo de constantes
@@ -25,6 +28,7 @@ class ctrMVC extends clControlador{
 		$this->nomConstantes	= 'con'	.	$pNomControlador;
 		$this->nomEntidades		= 'ent'	.	$pNomControlador;
 		$this->nomModelo		= 'mod'	.	$pNomControlador;
+		$this->nomVista			= 'vis'	.	$pNomControlador;
 		
 		// Cargamos los elementos
 		$this->mCargaElementos();
@@ -35,8 +39,11 @@ class ctrMVC extends clControlador{
 	/*--------------------------------------------------------------*/
     public function mPrincipal(){	
 		
-		$arrCanciones	= $this->clModelo->mCargarCanciones();
-		print_r($arrCanciones);
+		$this->entMVC  					= new entMVC();
+		$this->entMVC->arrCanciones		= $this->clModelo->mCargarCanciones();
+		
+		// Cargamos la vista con todo lo que teniamos
+		$this->mCargarVista($this->nomVista);
 
     }
 	
@@ -45,11 +52,11 @@ class ctrMVC extends clControlador{
 	/*--------------------------------------------------------------*/
 	private function mCargaElementos(){
 		// Realizamos la carga de constantes
-		$this->m_cargarConstantes($this->nomConstantes);
+		$this->mCargarConstantes($this->nomConstantes);
 		// Realizamos la carga de entidades
-		$this->m_cargarEntidades($this->nomEntidades);
+		$this->mCargarEntidades($this->nomEntidades);
         // Realizamos la carga de modelo
-        $this->clModelo = $this->m_cargarModelo($this->nomModelo);
+        $this->clModelo = $this->mCargarModelo($this->nomModelo);
 	}
 	
 }

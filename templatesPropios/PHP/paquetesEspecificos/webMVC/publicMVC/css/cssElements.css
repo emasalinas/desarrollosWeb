@@ -1,0 +1,89 @@
+.pageFormat{
+	width:100%;
+	min-height:100%;
+	background-image: url(../img/bgBlackPaper.png);
+}
+
+.pageLayout{
+	width:100%;
+	height:100%;
+	position:fixed;
+	min-height:100%;
+	background-image: url(../img/backgroundLetters.png);
+	background-repeat:no-repeat;
+	background-position: center top;
+	background-size: cover;
+}
+
+.pageContent{
+	width:100%;
+	height:100%;
+	position: fixed;
+	background-image: url(../img/backgroundArt.png);
+	background-repeat:no-repeat;
+	background-attachment: fixed;
+	background-size: contain;
+	background-position: center top;
+	background-attachment: fixed;
+}
+
+.panelBottom{
+	width:100%;
+	text-align:center;
+	position:absolute;
+	bottom: 10px;
+	left: 0;
+}
+
+.titleCD{
+	top:20px;
+	width: 100%;
+	position: absolute;
+	text-align:center;
+}
+
+.titleCD img{
+	width: 70%;
+	max-width: 900px;
+	vertical-align:bottom;
+}
+
+.logotypeBand{
+	width: 30%;
+	max-height: 30%;
+	display: inline-block;
+}
+
+.logotypeBand img{
+	width:100%;
+	max-width:50%; 
+	max-height:100%;
+	vertical-align:bottom;
+}
+
+.downloadSector{
+	display: inline-block;
+	width:40%;
+}
+
+.downloadSector img{
+	width:60%;
+	max-width: 200px;
+	vertical-align:bottom;
+}
+
+.socialIcons{
+	width:20%;
+	display: inline-block;
+}
+
+.iconSector{
+	display: inline-block;
+	float: left;
+}
+
+.iconSector img{
+	width:100%;
+	max-width: 36px;
+	vertical-align:bottom;
+}

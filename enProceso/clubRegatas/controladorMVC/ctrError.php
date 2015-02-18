@@ -45,11 +45,11 @@ class ctrError extends clControlador{
 	/*--------------------------------------------------------------*/
 	private function mCargaElementos(){
 		// Realizamos la carga de constantes
-		$this->m_cargarConstantes($this->nomConstantes);
+		$this->mCargarConstantes($this->nomConstantes);
 		// Realizamos la carga de entidades
-		$this->m_cargarEntidades($this->nomEntidades);
+		$this->mCargarEntidades($this->nomEntidades);
         // Realizamos la carga de modelo
-        $this->clModelo = $this->m_cargarModelo($this->nomModelo);
+        $this->clModelo = $this->mCargarModelo($this->nomModelo);
 	}
 	
 }

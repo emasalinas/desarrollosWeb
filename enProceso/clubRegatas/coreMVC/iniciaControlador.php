@@ -22,7 +22,7 @@ class clControlador extends clMysqliQuery {
     /*--------------------------------------------------------------*/
 	// Metodo de carga del archivo de constantes
 	/*--------------------------------------------------------------*/
-	public function m_cargarConstantes($pNombreConstantes)
+	public function mCargarConstantes($pNombreConstantes)
     {
         require './constantesMVC/' . 	$pNombreConstantes 	. '.php';
     }
@@ -30,7 +30,7 @@ class clControlador extends clMysqliQuery {
     /*--------------------------------------------------------------*/
 	// Metodo de carga del archivo de entidades
 	/*--------------------------------------------------------------*/
-	public function m_cargarEntidades($pNombreEntidad)
+	public function mCargarEntidades($pNombreEntidad)
     {
         require './entidadesMVC/' .  	$pNombreEntidad 	. '.php';
     }
@@ -38,7 +38,7 @@ class clControlador extends clMysqliQuery {
     /*--------------------------------------------------------------*/
 	// Metodo de carga del archivo de modelo
 	/*--------------------------------------------------------------*/
-    public function m_cargarModelo($pNombreModelo)
+    public function mCargarModelo($pNombreModelo)
     {
         require './modeloMVC/' .  	$pNombreModelo 		. '.php';
 		return new $pNombreModelo();
@@ -47,7 +47,7 @@ class clControlador extends clMysqliQuery {
 	/*--------------------------------------------------------------*/
 	// Metodo de carga del archivo de entidades
 	/*--------------------------------------------------------------*/
-	public function m_cargarVista($pNombreEntidad)
+	public function mCargarVista($pNombreEntidad)
     {
         include './vistaMVC/' .  	$pNombreEntidad 	. '.php';
     }

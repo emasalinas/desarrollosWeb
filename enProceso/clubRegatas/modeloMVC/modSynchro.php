@@ -1,8 +1,8 @@
 <?php
 /*********************************************************************
-* Codigo del archivo	: PHP_010_modMVC
-* Nombre del archivo	: modMVC.php
-* Objetivo del archivo	: Modelo del MVC
+* Codigo del archivo	: PHP_010_modSynchro
+* Nombre del archivo	: modSynchro.php
+* Objetivo del archivo	: Modelo del Synchro
 *
 * Categoria				: PHP
 * Paquete				: 010
@@ -34,9 +34,9 @@ class modSynchro {
 	}
 	
 	/*--------------------------------------------------------------*/
-	// Metodo de ejemplo
+	// Metodo para realizar al consulta y extraer datos
 	/*--------------------------------------------------------------*/
-	public function mRealizaConsulta($pTableName, $pFieldOrder = '' , $pFieldWhere = '', $pValueWhere = ''){	
+	public function mRealizaConsulta($pTableName,  $pFieldWhere = '', $pValueWhere = '', $pFieldOrder = ''){	
 		
 		$this->tableName	=	$pTableName;
 		$this->fieldOrder	=	$pFieldOrder;
@@ -51,7 +51,7 @@ class modSynchro {
 	}
 	
 	/*--------------------------------------------------------------*/
-	// Metodo para 
+	// Metodo para comenzar la sincronización
 	/*--------------------------------------------------------------*/
 	public function mSynchroClubRegatas($pSyncHandler){
 						
@@ -63,14 +63,17 @@ class modSynchro {
 
 	}
 	
+	/*--------------------------------------------------------------*/
+	// Metodo para extracción de datos
+	/*--------------------------------------------------------------*/
 	protected function mObtenerDatosMysql(){
 			
 		$this->vQueryString 	 = 'SELECT * FROM tbl'.ucfirst($this->tableName);
-		if(!empty($this->fieldOrder)){
-			$this->vQueryString 	.= ' ORDER BY '.$this->fieldOrder;
-		}
 		if(!empty($this->fieldWhere) && !empty($this->valueWhere)){
 			$this->vQueryString 	.= ' WHERE '.$this->fieldWhere.' = "'.$this->valueWhere.'"';
+		}
+		if(!empty($this->fieldOrder)){
+			$this->vQueryString 	.= ' ORDER BY '.$this->fieldOrder;
 		}
 		
 		$clQuery	= $this->clMysqliConn->mRealizaConsulta($this->vQueryString);
@@ -87,7 +90,10 @@ final class SqlSyncHandler{
 	
 	private $arrClientData, $arrJsonData;
 	private $arrServerAnswer = array("result"=> '',"message" => '', "sync_date" => '',"data" => array());
-		 
+	
+	/*--------------------------------------------------------------*/
+	// Constructor de la clase
+	/*--------------------------------------------------------------*/
 	public function __construct($pDataFlow = NULL){
 		
 		if($pDataFlow == NULL)
@@ -98,7 +104,10 @@ final class SqlSyncHandler{
 		$this -> arrClientData = json_decode($this->arrJsonData);
 		
 	}
-		
+	
+	/*--------------------------------------------------------------*/
+	// Preparamos la respuesta al cliente
+	/*--------------------------------------------------------------*/
 	public function mReply($pStatus,	$pMessage,	$pData){
 		
 		if($pStatus)
@@ -113,19 +122,31 @@ final class SqlSyncHandler{
 		//echo json_encode($this->arrServerAnswer);
 		
 	}
-	 
+	
+	/*--------------------------------------------------------------*/
+	// Invocamos a la funcion de sincronización
+	/*--------------------------------------------------------------*/
 	public function mCall($pFunction,	SqlSyncHandler $pParameter = NULL){
 		call_user_func($pFunction, $pParameter);
 	}
-	 
+	
+	/*--------------------------------------------------------------*/
+	// Devolvemos datos de cliente
+	/*--------------------------------------------------------------*/
 	public function mGetClientData(){
 		return $this -> arrClientData;
 	}
-	 
+	
+	/*--------------------------------------------------------------*/
+	// Devolvemos datos de servidor
+	/*--------------------------------------------------------------*/
 	public function mGetServerAnswer(){
 		return $this -> arrServerAnswer;
 	}
-	 
+	
+	/*--------------------------------------------------------------*/
+	// Devolvemos datos
+	/*--------------------------------------------------------------*/
 	public function mGetJsonData(){
 		return $this -> arrJsonData;
 	}

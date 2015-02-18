@@ -43,7 +43,7 @@ class ctrIndex extends clControlador{
 		$this->entIndex->arrResultados	= $this->clModelo->mObtenerResultado(1);
 		
 		// Cargamo la vista con todo lo que teniamos
-		$this->m_cargarVista($this->nomVista);
+		$this->mCargarVista($this->nomVista);
 
     }
 	
@@ -52,11 +52,11 @@ class ctrIndex extends clControlador{
 	/*--------------------------------------------------------------*/
 	private function mCargaElementos(){
 		// Realizamos la carga de constantes
-		$this->m_cargarConstantes($this->nomConstantes);
+		$this->mCargarConstantes($this->nomConstantes);
 		// Realizamos la carga de entidades
-		$this->m_cargarEntidades($this->nomEntidades);
+		$this->mCargarEntidades($this->nomEntidades);
         // Realizamos la carga de modelo
-        $this->clModelo = $this->m_cargarModelo($this->nomModelo);
+        $this->clModelo = $this->mCargarModelo($this->nomModelo);
 	}
 	
 }

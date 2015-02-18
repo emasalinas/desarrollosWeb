@@ -1,0 +1,20 @@
+1;SRM;Supplier Relationship Management
+2;GL;General Ledger
+3;TM ;Transportation Management
+4;MM;Material Managment
+5;FI;Financials
+7;SD;Sales Distribution
+8;AR;Account Receivable
+9;TR;Treasury
+10;PM;Plant Maintenance
+11;MM-IM;Inventory Management
+12;AP;Account Payable
+13;PA;Profitability Analisis
+14;CO;Controlling
+15;PS;Project Sistem
+16;MM-PUR;Purcharse
+17;EC;Enviromental Compliance
+18;OM;Organizational Managment
+19;"TM
+GL";Travel Management
+20;MM-FI;MM FI Integration

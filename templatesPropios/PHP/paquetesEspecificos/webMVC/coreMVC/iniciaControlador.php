@@ -43,4 +43,14 @@ class clControlador extends clMysqliQuery {
         require './modeloMVC/' .  	$pNombreModelo 		. '.php';
 		return new $pNombreModelo();
     }
+	
+	/*--------------------------------------------------------------*/
+	// Metodo de carga del archivo de entidades
+	/*--------------------------------------------------------------*/
+	public function mCargarVista($pNombreEntidad, $pCargaHyF = true)
+    {	
+		if($pCargaHyF == true) include './publicMVC/html/pageHeader.php';
+        include './vistaMVC/' .  	$pNombreEntidad 	. '.php';
+		if($pCargaHyF == true) include './publicMVC/html/pageFooter.php';
+    }
 }

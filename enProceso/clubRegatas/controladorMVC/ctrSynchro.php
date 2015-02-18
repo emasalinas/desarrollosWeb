@@ -43,15 +43,15 @@ class ctrSynchro extends clControlador{
     }
 	
 	/*--------------------------------------------------------------*/
-	// Metodo para pantalla principal del controlador (Sin Accion)
+	// Metodo Syncro
 	/*--------------------------------------------------------------*/
-    public function mSynchro($ptableName, $pFieldOrder = '' , $pFieldWhere = '', $pValueWhere = ''){	
+    public function mSynchro($ptableName,  $pFieldWhere = '', $pValueWhere = '', $pFieldOrder = ''){	
 		
 		$this->entSynchro  					= new entSynchro();
-		$this->entSynchro->arrServerAnswer	= $this->clModelo->mRealizaConsulta($ptableName, $pFieldOrder, $pFieldWhere, $pValueWhere);
+		$this->entSynchro->arrServerAnswer	= $this->clModelo->mRealizaConsulta($ptableName, $pFieldWhere, $pValueWhere, $pFieldOrder);
 		
 		// Cargamo la vista con todo lo que teniamos
-		$this->m_cargarVista($this->nomVista);
+		$this->mCargarVista($this->nomVista);
 
     }
 	
@@ -60,11 +60,11 @@ class ctrSynchro extends clControlador{
 	/*--------------------------------------------------------------*/
 	private function mCargaElementos(){
 		// Realizamos la carga de constantes
-		$this->m_cargarConstantes($this->nomConstantes);
+		$this->mCargarConstantes($this->nomConstantes);
 		// Realizamos la carga de entidades
-		$this->m_cargarEntidades($this->nomEntidades);
+		$this->mCargarEntidades($this->nomEntidades);
         // Realizamos la carga de modelo
-        $this->clModelo = $this->m_cargarModelo($this->nomModelo);
+        $this->clModelo = $this->mCargarModelo($this->nomModelo);
 	}
 	
 }
