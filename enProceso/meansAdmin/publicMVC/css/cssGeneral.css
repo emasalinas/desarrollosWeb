@@ -1,0 +1,47 @@
+/*********************************************************************
+* Codigo del archivo	: cssGeneral
+* Nombre del archivo	: cssGeneral.php
+* Objetivo del archivo	: Estilos generales de la web
+*
+* Categoria				: CSS
+* Paquete				: 001
+* Autor:				: German Laso
+* Version				: 0.9
+*********************************************************************/
+
+/*	#TagBody */
+html, body{ 	
+		margin: 0px;	
+		padding: 0px; 
+		height: 100%;
+		min-height: 100%;
+}
+
+/*	#TagA */
+
+a:link    {}
+a:visited {}
+a:hover   {text-decoration:underline;}
+a:active  {}
+
+/*	#TagH  */
+
+h1 { font-size: 16px; }
+h2 { font-size: 14px; }
+h3 { font-size: 12px; }
+h4 { font-size: 10px; }
+h5 { font-size: 8px; }
+h6 { font-size: 6px; }
+
+/*	#TagImg */
+
+img { border: none; }
+
+/*	#TagForm */
+
+form {margin:0px}
+
+/*	#TagTable */
+table{
+	border: 0;
+}
