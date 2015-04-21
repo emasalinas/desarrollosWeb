@@ -40,6 +40,7 @@ class ctrIndex extends clControlador{
     public function mPrincipal(){	
 		
 		$this->entIndex  					= new entIndex();
+		$this->entIndex->arrTargets			= $this->clModelo->mObtenerCiudades();
 		
 		// Cargamos la vista con todo lo que teniamos
 		$this->mCargarVista($this->nomVista);

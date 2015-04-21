@@ -51,4 +51,22 @@ define('typeTimeDownload', 			'time');
 define('typeResultDownload', 		'boolean');
 
 
+/*  Tabla Usuarios   */
+define('idPrincipal', 			'#');
+define('usuarioNombre', 		'Nombre');
+define('usuarioApellido', 		'Apellido');
+define('usuarioDNI', 			'Documento');
+define('usuarioClave', 			'Password');
+define('usuarioCalle', 			'Calle');
+define('usuarioNumero', 		'Numero');
+define('usuarioPiso', 			'Piso');
+define('UsuarioDepto', 			'Depto');
+define('usuarioPrefijo', 		'Cod. Área');
+define('usuarioCelular', 		'Celular');
+define('usuarioMail', 			'E-Mail');
+
+define('tituloUsuarios', 		'Clientes');
+define('subtituloUsuarios', 	'Pasajeros frecuentes');
+
+
 ?>

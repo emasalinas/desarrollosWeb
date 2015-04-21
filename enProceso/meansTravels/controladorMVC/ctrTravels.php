@@ -62,11 +62,20 @@ class ctrTravels extends clControlador{
 	/*--------------------------------------------------------------*/
 	// Metodo para visualizar un viaje
 	/*--------------------------------------------------------------*/
-    public function mView($pIdTravel){	
+    public function mView($pIdTravel, $pAction = NULL){	
 		
 		$this->entTravels  					= new entTravels();
-		$this->entTravels->travelData		= $this->clModelo->mGetTravel($pIdTravel);
-		$this->entTravels->arrSeats			= $this->clModelo->mGetSeats($pIdTravel);
+		$this->entTravels->vTravelID		= $this->mDecryptText($pIdTravel, true);
+		
+		if($pAction != NULL){
+			$vAction	= 'm' .	ucfirst(strtolower($pAction));
+			if (method_exists($this, $vAction)) {
+				$this->{$vAction}();
+			}
+		}
+				
+		$this->entTravels->travelData		= $this->clModelo->mGetTravel($this->entTravels->vTravelID);
+		$this->entTravels->arrSeats			= $this->clModelo->mGetSeats($this->entTravels->vTravelID);
 		
 		//Convertimos los valores del array a externos
 		$this->entTravels->arrTravel 		= $this->clModelo->mInputToOutput($this->entTravels->travelData);
@@ -75,6 +84,26 @@ class ctrTravels extends clControlador{
 		$this->mCargarVista($this->nomVista);
 
     }
+	
+	/*--------------------------------------------------------------*/
+	// Metodo para visualizar un viaje
+	/*--------------------------------------------------------------*/
+	public function mRenew(){
+		
+		$this->clSesion 	= new clSesiones;
+		$this->clSesion->mSessionStart();
+		
+		$vUserSlash	= $this->clSesion->mSessionGetVar('userSlash');
+		if(!empty($vUserSlash)){
+			
+			$vUserActive	=	$this->mDecryptText($vUserSlash, true);			
+			//Ponemos los asientos de ese usuario en estado 'Libre'.
+			$this->entTravels->seatChanged		= 
+			$this->clModelo->mSetAsientoEstado($vUserActive, estadoAsientoLibre, $vUserActive);
+		
+		}
+		
+	}
 	
 	
 	

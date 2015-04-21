@@ -22,6 +22,7 @@ class entCheckout {
 	public $arrSeat 	= array();
 	
 	public $userActive;
+	public $idTravelEncrypt;
 }
 
 

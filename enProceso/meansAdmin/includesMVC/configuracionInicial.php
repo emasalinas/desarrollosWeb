@@ -14,7 +14,8 @@
 * Configuraciones de PHP
 *********************************************************************/
 error_reporting(E_ALL);
-ini_set("display_errors", 1);
+ini_set("display_errors", 0);
+date_default_timezone_set('America/Argentina/Buenos_Aires');
 
 /********************************************************************
 * Constantes Globales
@@ -24,7 +25,7 @@ require './includesMVC/constantesGlobales.php';
 /********************************************************************
 * Clases Globales
 *********************************************************************/
-//require '';
+require './includesMVC/clasesConversiones.php';
 
 /********************************************************************
 * Variables Globales

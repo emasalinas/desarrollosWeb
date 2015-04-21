@@ -62,31 +62,32 @@ class ctrCheckout extends clControlador{
 	/*--------------------------------------------------------------*/
 	// Metodo para pantalla principal del controlador (Sin Accion)
 	/*--------------------------------------------------------------*/
-    public function mConfirm($pState, $pIdTravel = 0, $pIdSeat = 0){
+    public function mConfirm($pState, $pIdTravel = NULL, $pIdSeat = NULL){
 		
 		$this->clSesion = new clSesiones;
 		$this->clSesion->mSessionStart();
 		
-		if($pIdTravel != 0){
-			$this->clSesion->mSessionCreateVar('travelID'	,$pIdTravel);
-			$this->clSesion->mSessionCreateVar('seatID'		,$pIdSeat);
+		if($pIdTravel != NULL){
+			$this->clSesion->mSessionCreateVar('travelID'	, $pIdTravel);
+			$this->clSesion->mSessionCreateVar('seatID'		, $pIdSeat);
+		}else{
+			$pIdTravel	=	$this->clSesion->mSessionGetVar('travelID');
+			$pIdSeat	=	$this->clSesion->mSessionGetVar('seatID');
 		}
-				
+		
+		$this->entCheckout  					= new entCheckout();
+		$this->entCheckout->idTravelEncrypt		= $pIdTravel;
 		$vUserSlash	= $this->clSesion->mSessionGetVar('userSlash');
 		if(isset($vUserSlash)){
-		
-			$this->entCheckout  				= new entCheckout();
 			
-			$vIdTravel	=	$this->clSesion->mSessionGetVar('travelID');
-			$vIdSeat	=	$this->clSesion->mSessionGetVar('seatID');
-			
-			$this->entCheckout->userActive		= rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5(C_ENCRYPTION_STRING), base64_decode($vUserSlash), MCRYPT_MODE_CBC, md5(md5(C_ENCRYPTION_STRING))), "\0");
-			
+			$vIdTravel	=	$this->mDecryptText($pIdTravel,true );
+			$vIdSeat	=	$this->mDecryptText($pIdSeat,true);
+			$this->entCheckout->userActive		= $this->mDecryptText($vUserSlash,true);
 			$this->entCheckout->seatState		= $this->clModelo->mGetAsientoEstado($vIdSeat);
 			
 			if(strtolower($pState) == 'preliminary'){
 				// Para colocarlo como pendiente, debe estar libre
-				if($this->entCheckout->seatState['estadoPasajero'] == '0'){
+				if($this->entCheckout->seatState['estadoPasajero'] == C_SEAT_STATE_FREE){
 					//Ponemos el asiento en estado 'Pendiente'.
 					$this->entCheckout->seatChanged		= $this->clModelo->mSetAsientoEstado($vIdSeat, C_SEAT_STATE_PENDING, $this->entCheckout->userActive);
 				}else{
@@ -95,7 +96,7 @@ class ctrCheckout extends clControlador{
 			}elseif(strtolower($pState) == 'posted'){
 				// Para colocarlo como pendiente, debe estar pendiente
 				// Y tomado por el mismo usuario
-				if(	$this->entCheckout->seatState['estadoPasajero'] == '1'
+				if(	$this->entCheckout->seatState['estadoPasajero'] == C_SEAT_STATE_PENDING
 				&& 	$this->entCheckout->seatState['idRelacion2'] 	== $this->entCheckout->userActive){
 				//Ponemos el asiento en estado 'Confirmado'.
 					$this->entCheckout->seatChanged		= $this->clModelo->mSetAsientoEstado($vIdSeat, C_SEAT_STATE_CONFIRM, $this->entCheckout->userActive);
@@ -118,17 +119,9 @@ class ctrCheckout extends clControlador{
 			$this->clSesion->mSessionCreateVar('callBackURL'	, $vCallBackURL);
 			$this->clSesion->mSessionCreateVar('travelID'		, $pIdTravel);
 			$this->clSesion->mSessionCreateVar('seatID'			, $pIdSeat);
-			header('Location: /meansTravels/login/');
+			header('Location: '.C_PREFIX_HOME.'/login/');
 			
 		}
-
-    }	
-	
-	public function mStop(){
-		
-		$this->clSesion = new clSesiones;
-		$this->clSesion->mSessionStart();
-		$this->clSesion->mSessionStop();
 
     }	
 }

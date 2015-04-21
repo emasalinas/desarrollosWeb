@@ -11,12 +11,17 @@
 *********************************************************************/
 
 class clControlador extends clMysqliQuery {
+	
+	public $userSession 	= C_USER_LOGIN_OUT;
+	public $sessionID		= null;
+	public $sessionsVars	= array();
+	public $userData		= array();
 		
 	/*--------------------------------------------------------------*/
 	// Constructor de la clase
 	/*--------------------------------------------------------------*/
     public function __construct(){	
-
+		
     }
 
     /*--------------------------------------------------------------*/
@@ -49,9 +54,48 @@ class clControlador extends clMysqliQuery {
 	/*--------------------------------------------------------------*/
 	public function mCargarVista($pNombreEntidad, $pCargaHyF = true)
     {	
+		$this->mCheckSession();	
 		if($pCargaHyF == true) include './publicMVC/html/pageHeader.php';
         include './vistaMVC/' .  	$pNombreEntidad 	. '.php';
 		if($pCargaHyF == true) include './publicMVC/html/pageFooter.php';
     }
+	
+	/*--------------------------------------------------------------*/
+	// Encriptar texto
+	/*--------------------------------------------------------------*/
+	public function mEncryptText($pText, $pUrlEncode = false){
+		$vEncode = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5(C_ENCRYPTION_STRING), $pText, MCRYPT_MODE_CBC, md5(md5(C_ENCRYPTION_STRING))));
+		if($pUrlEncode == true) $vEncode = rawurlencode(rawurlencode($vEncode));
+		return $vEncode;
+	}
+	
+	/*--------------------------------------------------------------*/
+	// Desencriptar texto
+	/*--------------------------------------------------------------*/
+	public function mDecryptText($pText, $pUrlDecode = false){
+		if($pUrlDecode == true) $pText = rawurldecode(rawurldecode($pText));
+		$vDecode = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5(C_ENCRYPTION_STRING), base64_decode($pText), MCRYPT_MODE_CBC, md5(md5(C_ENCRYPTION_STRING))), "\0");
+		return $vDecode;
+	}
+	
+	/*--------------------------------------------------------------*/
+	// Obtenenemos la direccion y la separamos en parametros
+	/*--------------------------------------------------------------*/
+    public function mCheckSession()
+    {
+		$this->clSesion 	= new clSesiones;
+		$this->clSesion->mSessionStart();
+		
+		$this->sessionsVars = $_SESSION;
+		if(isset($this->sessionsVars['userSlash'])){
+			$vUserID			= $this->mDecryptText($this->sessionsVars['userSlash'], true);
+			$this->userData		= $this->clSesion->mUserGetData($vUserID);
+		}
+		
+		$this->sessionID 	= session_id();
+		if($this->clSesion->mSessionCheck()){
+			$this->userSession	=	C_USER_LOGIN_IN;
+		}
+	}
 
 }

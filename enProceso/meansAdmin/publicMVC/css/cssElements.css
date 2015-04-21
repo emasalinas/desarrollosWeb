@@ -1,43 +1,38 @@
 .pageFormat{
 	width:100%;
 	min-height:100%;
-	background-color: #6A8B92;
-}
-
-.pageLayout{
-	width:100%;
-	height:100%;
-	position:fixed;
-	min-height:100%;
 }
 
 .pageContent{
-	width:100%;
-	height:100%;
-	text-align: -webkit-center;
-}
-
-.panelBottom{
-	width:100%;
-	text-align:center;
-	position:absolute;
-	bottom: 10px;
-	left: 0;
-}
-
-#page-wrapper {
     padding: 0 15px;
     min-height: 568px;
     background-color: #fff;
 }
 
 @media(min-width:768px) {
-    #page-wrapper {
+    .pageContent{
         position: inherit;
         margin: 0 0 0 250px;
         padding: 0 30px;
         border-left: 1px solid #e7e7e7;
     }
+}
+
+.pageContentTwo{
+	width:100%;
+	height:100%;
+	text-align: -webkit-center;
+}
+
+#loginForm{
+	width: 30%;
+	background-color: #EEE;
+	padding:10px;
+	border-radius: 10px;
+}
+
+#loginMessage{
+	width: 30%;
 }
 
 .navbar-top-links {
@@ -559,13 +554,6 @@ table.dataTable thead .sorting:after {
 .active > a > .glyphicon.arrow:before {
     content: "\e114";
 }
-
-
-/*
- * Require Font-Awesome
- * http://fortawesome.github.io/Font-Awesome/
-*/
-
 
 .fa.arrow:before {
     content: "\f104";

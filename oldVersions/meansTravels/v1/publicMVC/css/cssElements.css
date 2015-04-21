@@ -1,0 +1,124 @@
+.pageFormat{
+	width:100%;
+	min-height:100%;
+	background-color: #6A8B92;
+}
+
+.pageLayout{
+	width:100%;
+	height:100%;
+	position:fixed;
+	min-height:100%;
+}
+
+.pageContent{
+	width:100%;
+	height:100%;
+	text-align: -webkit-center;
+}
+
+#loginForm{
+	width: 30%;
+	background-color: #819FA3;
+	padding:10px;
+	border-radius: 10px;
+}
+
+#loginMessage{
+	width: 30%;
+}
+
+#registerForm{
+	width: 40%;
+	background-color: #819FA3;
+	padding:10px;
+	border-radius: 10px;
+	text-align: left;
+}
+
+#registerMessage{
+	width: 30%;
+}
+
+#filterForm{
+	width: 40%;
+	background-color: #819FA3;
+	padding:10px;
+	border-radius: 10px;
+	text-align:left;
+}
+
+#filteMessage{
+	width: 40%;
+}
+
+#filterList{
+	width: 60%;
+	color:#333;
+	margin: 10px;
+}
+
+#travelDetail, #travelPayForm, #travelActions {
+	width: 60%;
+	padding:10px;
+	background-color: #FFF;
+	border-radius: 6px;
+	margin-bottom: 10px;
+}
+
+#travelActions {
+	text-align:right;
+}
+
+#travelCar{
+	width: 60%;
+	min-height: 50%;
+	background-image: url(../img/carTravel.png);
+	background-repeat:no-repeat;
+	background-position: center top;
+	background-size: 100%;
+}
+
+#travelSeats{
+	width: 22%;
+	padding-top: 5%;
+	padding-bottom: 7%;
+}
+
+#travelSeats img{
+	width: 100%;
+}
+
+#travelHelp{
+	width: 60%;
+	height:100px;
+}
+
+/******************************************************************
+* Pricing Table
+******************************************************************/
+.priceTable * {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.priceTable {
+    width: 100%;
+    text-align: center;
+}
+
+.priceBlock{
+    width: 30%;    
+    margin: 0 15px;
+    overflow: hidden;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}

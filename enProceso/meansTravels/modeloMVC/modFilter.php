@@ -137,12 +137,41 @@ class modFilter {
 	/*--------------------------------------------------------------*/
 	public function mObtenerPrecio($pValue){
 		
-		$this->vQueryString		 = "SELECT precioCondPago FROM tblCondicionesPago ";
-		$this->vQueryString		.= "WHERE idPrincipal = '".$pValue."' ";
+		$this->vQueryString		 = "SELECT nomPrecio, formulaPrecio FROM tblPrecios ";
+		$this->vQueryString		.= "WHERE idRelacion1 = '".$pValue."' ";
 		$clQuery	= $this->clMysqliConn->mRealizaConsulta($this->vQueryString);
-		$arrQuery	= $this->clMysqliConn->mCrearArray();
-		return $arrQuery['precioCondPago'];
+		$arrQuery	= $this->clMysqliConn->mCrearArrayMultiple();
+		return $this->mCalcularTotal($arrQuery);
 		
+	}
+	
+	/*--------------------------------------------------------------*/
+	// Metodo para obtener cond. precio
+	/*--------------------------------------------------------------*/
+	public function mCalcularTotal($arrValues){
+		
+		$vTotal = 0;
+		foreach($arrValues as $vValues){
+			if($vValues['formulaPrecio'] != NULL){
+				$vValor = substr($vValues['formulaPrecio'],1);
+				switch(substr($vValues['formulaPrecio'], 0, 1)){
+					case '*':
+						$vTotal = $vTotal * $vValor;
+					break;
+					case '+':
+						$vTotal = $vTotal + $vValor;
+					break;
+					case '-':
+						$vTotal = $vTotal - $vValor;
+					break;
+					case '/':
+						$vTotal = $vTotal / $vValor;
+					break;
+				}
+			}
+		}
+		
+		return $vTotal;
 	}
 	
 	/*--------------------------------------------------------------*/
@@ -163,9 +192,6 @@ class modFilter {
 			$arrQuery	= $this->clMysqliConn->mCrearArrayMultiple();
 			return $arrQuery;
 		}
-		
-		
-		
 	}
 	
 	

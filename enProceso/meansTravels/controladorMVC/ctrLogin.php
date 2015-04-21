@@ -83,9 +83,9 @@ class ctrLogin extends clControlador{
 			$vCallBackURL		=	$this->clSesion->mSessionGetVar('callBackURL');
 			
 			if(isset($vCallBackURL))
-				header('Location: /meansTravels'.$vCallBackURL);
+				header('Location: '.C_PREFIX_HOME.$vCallBackURL);
 			else
-				header('Location: /meansTravels/filter/');
+				header('Location: '.C_PREFIX_HOME.'/filter/');
 				
 		}else{
 			
@@ -95,5 +95,17 @@ class ctrLogin extends clControlador{
 
     }
 	
+	/*--------------------------------------------------------------*/
+	// Metodo para cierra de sesion
+	/*--------------------------------------------------------------*/
+    public function mLogout(){	
+		
+		$this->clSesion = new clSesiones;
+		$this->clSesion->mSessionStart();
+		$this->clSesion->mSessionStop();
+		
+		header('Location: '.C_PREFIX_HOME);
+		
+	}
 	
 }

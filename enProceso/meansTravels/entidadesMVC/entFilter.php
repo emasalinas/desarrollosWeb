@@ -15,13 +15,13 @@
 *********************************************************************/
 class entFilter {
 	
+	public $actualView;
 	public $userActive;
 	public $userSlash;
 	
 	public $travelData = array();
 	public $arrTravels = array();
 	public $arrTargets = array();
-	
 	
 	public $travelFrom;
 	public $travelTo;

@@ -1,0 +1,20 @@
+/*********************************************************************
+* Codigo del archivo	: cssColor
+* Nombre del archivo	: cssColor.php
+* Objetivo del archivo	: Colores de la web
+*
+* Categoria				: CSS
+* Paquete				: 001
+* Autor:				: German Laso
+* Version				: 0.9
+*********************************************************************/
+
+.thcolor, .thcolorhover:hover, .mt-services article:hover h2 a, .mt-blog-list article:hover h2 a, .widget-blogpost ul li:hover h6 a, .mt-team article:hover h5 a, .mt-404 h1 {
+	color: #087dc2 !important;
+}
+.thbg-color, .thbg-colorhover:hover, .mt-topbar, #lang_sel ul li ul, .navbar-nav > li > a:before, .sub-dropdown li:before, .mt-usernetwork:before, .nav-tabs > li.active > a, .nav-tabs > li > a:hover, .nav-tabs > li.active > a:focus, .input-group-addon, .mt-team figure:before, .mt-tag ul li:hover a, .mt-gallery ul li figure figcaption:before, .pagination a:before, .pagination a:after,/*Widget*/ .widget_categories ul li:hover, .widget_archive ul li:hover, .widget_search form input[type="submit"], .widget_tag a:hover, .mt-section-title h3:before, .mt-section-title h2:before, .mt-widget-title h2:before {
+	background-color: #087dc2 !important;
+}
+.th-bordercolor, .th-bordercolorhover:hover, blockquote, .mt-user-tag, .sub-dropdown {
+	border-color: #087dc2 !important;
+}

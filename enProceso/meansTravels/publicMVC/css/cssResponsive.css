@@ -1,0 +1,103 @@
+/*********************************************************************
+* Codigo del archivo	: cssResponsive
+* Nombre del archivo	: cssResponsive.php
+* Objetivo del archivo	: Personalizacion de medios
+*
+* Categoria				: CSS
+* Paquete				: 001
+* Autor:				: German Laso
+* Version				: 0.9
+*********************************************************************/
+
+/*============  Media 768Px Start ============ */ 
+@media (min-width: 768px) and (max-width: 990px) {
+    /* Main Grid */
+    .col-md-4,.col-md-3,.col-md-6 { width: 50%; }
+    .col-md-2 { width: 25%; }
+
+    /* Header */
+    header .mt-social-network,.mt-userinfo > li:first-child { display: none; }
+    .navbar-nav > li { padding: 5px 9px; }
+    .mt-search { padding: 5px 0; }
+    .sub-dropdown .sub-dropdown { left: auto; right: 85%; }
+    .mt-medium article figure { width: 100%; }
+    .mt-medium article figure ~ .mt-teaminfo { float: left; width: 100%; padding: 15px 0px 0px 0px; }
+
+    /* Content */
+    .mt-bookingtab .nav-tabs > li > a { padding: 12px 32px; }
+    .mt-subscribe form p input[type="text"] { width: 100%; }
+    /* Footer */
+    #copyright { text-align: center; }
+    #copyright p { margin-bottom: 15px; }
+}
+
+/*============ Media 420Px Start ============ */
+@media (max-width: 767px) {
+    /* Main Grid */
+    .col-md-4,.col-md-3,.col-md-6 { width: 50%; }
+    .col-md-2 { width: 25%; }
+
+    /* Header */
+    .mt-topinfo,.mt-caption { display: none; }
+    #mainheader { text-align: center; }
+    #mainheader [col-md-] { width: 100%; }
+    .navbar-header { display: inline-block; margin: 32px 0 0; }
+    .navbar-collapse { background: #fff; position: absolute; right: 0; text-align: left; top: 100%; width: 280px; }
+    .navbar-nav > li { padding: 10px 14px; }
+    .sub-dropdown { margin: 15px 0px; position: static; opacity: 1; visibility: visible; float: left; width: 100%; -webkit-transform: translateY(0px); -moz-transform: translateY(0px); -ms-transform: translateY(0px); -o-transform: translateY(0px); transform: translateY(0px); }
+    .kf_sticky { position: static; }
+
+    /* Content */
+    .mt-blogmedium figure,.mt-tourform ul li,.mt-services figure,.mt-subscribe form p input[type="text"] { width: 100%; }
+    .mt-blogmedium figure ~ .mt-bloginfo,.mt-services figure ~ .mt-serviceinfo { float: left; width: 100%; padding: 15px 0px 0px 0px; }
+    .mt-tourform { position: static; float: left; width: 100%; } .mt-tourform ul li { margin-bottom: 20px; } .mt-tourform form { padding-top: 0px; }
+    .mt-subscribe form p { padding-bottom: 10px; }
+    .mt-followus-widget ul li { width: 25%; }
+    .mt-loginbox .modal-dialog { width: 440px; }
+    body { overflow-x: hidden; }
+    .mt-blog-detail .mt-rich-editor { float: left; width: 100%; padding: 0px; }
+    #kdcomments ul li figure ~ .text { float: left; width: 100%; margin: 9px 0px 0px 0px; }
+    #kdcomments ul li .text::before, #kdcomments ul li .text::after { left: 20px; top: -14px; -webkit-transform: rotate(90deg); -moz-transform: rotate(90deg); -ms-transform: rotate(90deg); -o-transform: rotate(90deg); transform: rotate(90deg); }
+    #kdcomments ul li .text::after { left: 20px; top: -15px; }
+    #kdcomments ul li .text .replay-btn { position: static; float: left; }
+    .mt-tag { margin-bottom: 15px; float: left; } .mt-tag span { margin-bottom: 10px; }
+    .mt-404 h1 { font-size: 100px; line-height: 100px; }
+    .mt-medium article figure { width: 100%; }
+    .mt-medium article figure ~ .mt-teaminfo { float: left; width: 100%; padding: 15px 0px 0px 0px; }
+    .mt-subscribe form p { width: 100%; padding: 0px 0px 10px 0px; }
+    .mt-partner ul li { text-align: center; }
+    .mt-partner ul li a { display: inline-block; }
+
+    /* Footer */
+    #copyright { text-align: center; }
+    #copyright .footer-nav { float: none; display: inline-block; }
+    #copyright p { margin-bottom: 15px; }
+}
+
+/*============ Media 300Px Star ============ */
+@media (max-width: 480px) {
+    /* Main Grid */
+    .col-md-4,.col-md-3,.col-md-2,.col-md-6 { width: 100%; }
+	.kf_sticky{position:relative;}
+	.kf_sticky .navbar-nav > li{padding:10px 14px;}
+    /* Header */
+    .mt-userinfo { text-align: center; }
+    .mt-userinfo > li:first-child { width: 100%; padding: 0px; }
+    .mt-userinfo > li .mt-social-network { float: none; display: inline-block; }
+    .mt-userinfo > li { border: none; float: none; display: inline-block; padding: 0px 10px 10px 10px; }
+    .logo { float: none; padding-bottom: 0px; display: inline-block; }
+    .navbar-collapse { right: auto; left: -100%; width: 240px; }
+    .mt-loginbox .modal-dialog { width: 300px; }
+    .mt-login-network ul li a { font-size: 12px; padding: 8px; }
+    .col-md-12 { padding-right: 20px; }
+}
+
+/*============  Media 940Px Start ============ */
+@media screen and (min-width: 991px) and (max-width: 1054px) {
+    /* Header */
+    .navbar-nav > li { padding: 48px 6px 40px; }
+    .mt-userinfo > li { padding: 11px 16px; }
+    .sub-dropdown .sub-dropdown { left: auto; right: 85%; }
+    /* Content */
+    .mt-subscribe form p input[type="text"] { width: 340px; }
+}

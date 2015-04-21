@@ -31,25 +31,33 @@ class ctrError extends clControlador{
 	}
 	
 	/*--------------------------------------------------------------*/
-	// Metodo para pantalla principal del controlador (Sin Accion)
-	/*--------------------------------------------------------------*/
-    public function mPrincipal(){	
-		
-		$arrCanciones	= $this->clModelo->mCargarCanciones();
-		print_r($arrCanciones);
-
-    }
-	
-	/*--------------------------------------------------------------*/
 	// Cargamos los elementos necesarios del controlador
 	/*--------------------------------------------------------------*/
 	private function mCargaElementos(){
 		// Realizamos la carga de constantes
-		$this->m_cargarConstantes($this->nomConstantes);
+		$this->mCargarConstantes($this->nomConstantes);
 		// Realizamos la carga de entidades
-		$this->m_cargarEntidades($this->nomEntidades);
+		$this->mCargarEntidades($this->nomEntidades);
         // Realizamos la carga de modelo
-        $this->clModelo = $this->m_cargarModelo($this->nomModelo);
+        $this->clModelo = $this->mCargarModelo($this->nomModelo);
 	}
+	
+	/*--------------------------------------------------------------*/
+	// Metodo para pantalla principal del controlador (Sin Accion)
+	/*--------------------------------------------------------------*/
+    public function mPrincipal(){	
+		
+		$vDos = '1';
+		//echo "Valor a encriptar: ".$vDos.", ";
+		
+		//echo "Valor encriptado: ".$this->mEncryptText($vDos, true)."\n ";
+		
+		//echo "Valor desencriptado: ".$this->mDecryptText($this->mEncryptText($vDos, true), true)."\n ";
+		
+		echo $this->mEncryptText($vDos, true);
+		echo $vValor = 'kiG8bwfZKOzU0teEy5nvWY4JXi%2B7lmndgK02J2M7T9o%3D';
+		echo $vValor = 'kiG8bwfZKOzU0teEy5nvWY4JXi%2B7lmndgK02J2M7T9o%3D';
+		echo "Valor desencriptado: ".$this->mDecryptText($vValor, true)."\n ";
+    }
 	
 }

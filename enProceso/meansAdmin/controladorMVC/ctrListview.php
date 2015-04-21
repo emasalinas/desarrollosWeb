@@ -35,6 +35,19 @@ class ctrListview extends clControlador{
 	}
 	
 	/*--------------------------------------------------------------*/
+	// Cargamos los elementos necesarios del controlador
+	/*--------------------------------------------------------------*/
+	private function mCargaElementos(){
+		
+		// Realizamos la carga de constantes
+		$this->mCargarConstantes($this->nomConstantes);
+		// Realizamos la carga de entidades
+		$this->mCargarEntidades($this->nomEntidades);
+        // Realizamos la carga de modelo
+        $this->clModelo = $this->mCargarModelo($this->nomModelo);
+	}
+	
+	/*--------------------------------------------------------------*/
 	// Metodo para pantalla principal del controlador (Sin Accion)
 	/*--------------------------------------------------------------*/
     public function mPrincipal(){	
@@ -74,7 +87,7 @@ class ctrListview extends clControlador{
 		
 		
 		$this->entListview->arrListView			= $this->clModelo->mExecuteQuery($this->entListview->arrFieldsGet, $this->entListview->vTableName, $this->entListview->arrFieldsWhere, $this->entListview->vFieldOrder);
-		$this->entListview->arrListView			= $this->clModelo->mBorrarDuplicados($this->entListview->arrListView, 'ipDownload');
+		//$this->entListview->arrListView			= $this->clModelo->mBorrarDuplicados($this->entListview->arrListView, 'ipDownload');
 		
 		$this->entListview->arrOptions	 		= explode('-', $pOptions);
 			
@@ -83,17 +96,6 @@ class ctrListview extends clControlador{
 
     }
 	
-	/*--------------------------------------------------------------*/
-	// Cargamos los elementos necesarios del controlador
-	/*--------------------------------------------------------------*/
-	private function mCargaElementos(){
-		
-		// Realizamos la carga de constantes
-		$this->mCargarConstantes($this->nomConstantes);
-		// Realizamos la carga de entidades
-		$this->mCargarEntidades($this->nomEntidades);
-        // Realizamos la carga de modelo
-        $this->clModelo = $this->mCargarModelo($this->nomModelo);
-	}
+	
 	
 }

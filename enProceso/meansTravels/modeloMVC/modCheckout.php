@@ -42,7 +42,6 @@ class modCheckout {
 		}else{
 			return false;
 		}
-		
 	}
 	
 	/*--------------------------------------------------------------*/
@@ -74,7 +73,7 @@ class modCheckout {
 		$this->vQueryString		.= "tblMovil.modeloMovil, tblMovil.patenteMovil ";
 		$this->vQueryString		.= "FROM tblViajes ";
 		$this->vQueryString		.= "INNER JOIN tblConductores ON tblConductores.idPrincipal = tblViajes.conductorViaje ";
-		$this->vQueryString		.= "INNER JOIN tblMovil ON tblMovil.idPrincipal = tblViajes.autoViaje ";
+		$this->vQueryString		.= "INNER JOIN tblMovil ON tblMovil.idPrincipal = tblViajes.movilViaje ";
 		$this->vQueryString		.= "WHERE tblViajes.idPrincipal = '".$pIdTravel."' ";
 		$clQuery	= $this->clMysqliConn->mRealizaConsulta($this->vQueryString);
 		$arrQuery	= $this->clMysqliConn->mCrearArray();
@@ -130,7 +129,7 @@ class modCheckout {
 				break;
 			
 			case 'precioViaje':
-				return '$ '.$this->mObtenerPrecio($pValue);
+				return $this->mObtenerPrecio($pValue);
 				break;
 			
 			case 'estadoViaje':
@@ -183,16 +182,45 @@ class modCheckout {
 	}
 	
 	/*--------------------------------------------------------------*/
-	// Metodo para obtener proveedor
+	// Metodo para obtener cond. precio
 	/*--------------------------------------------------------------*/
 	public function mObtenerPrecio($pValue){
 		
-		$this->vQueryString		 = "SELECT precioCondPago FROM tblCondicionesPago ";
-		$this->vQueryString		.= "WHERE idPrincipal = '".$pValue."' ";
+		$this->vQueryString		 = "SELECT nomPrecio, formulaPrecio FROM tblPrecios ";
+		$this->vQueryString		.= "WHERE idRelacion1 = '".$pValue."' ";
 		$clQuery	= $this->clMysqliConn->mRealizaConsulta($this->vQueryString);
-		$arrQuery	= $this->clMysqliConn->mCrearArray();
-		return $arrQuery['precioCondPago'];
+		$arrQuery	= $this->clMysqliConn->mCrearArrayMultiple();
+		return $this->mCalcularTotal($arrQuery);
 		
+	}
+	
+	/*--------------------------------------------------------------*/
+	// Metodo para obtener cond. precio
+	/*--------------------------------------------------------------*/
+	public function mCalcularTotal($arrValues){
+		
+		$vTotal = 0;
+		foreach($arrValues as $vValues){
+			if($vValues['formulaPrecio'] != NULL){
+				$vValor = substr($vValues['formulaPrecio'],1);
+				switch(substr($vValues['formulaPrecio'], 0, 1)){
+					case '*':
+						$vTotal = $vTotal * $vValor;
+					break;
+					case '+':
+						$vTotal = $vTotal + $vValor;
+					break;
+					case '-':
+						$vTotal = $vTotal - $vValor;
+					break;
+					case '/':
+						$vTotal = $vTotal / $vValor;
+					break;
+				}
+			}
+		}
+		
+		return $vTotal;
 	}
 	
 	/*--------------------------------------------------------------*/

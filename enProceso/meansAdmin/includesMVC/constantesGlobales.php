@@ -17,12 +17,31 @@
 /********************************************************************
 * Constantes del sistema
 *********************************************************************/
+$vFlag	= '';
+if($vFlag == 'dev'){
+define('CONS_BDHOST', 'localhost');
+define('CONS_BDUSER', 'fe000180_dev');
+define('CONS_BDPASS', '72tigeMUfu');
+define('CONS_BDNAME', 'fe000180_dev');
+}elseif($vFlag == 'qas'){
+define('CONS_BDHOST', 'localhost');
+define('CONS_BDUSER', 'fe000180_qas');
+define('CONS_BDPASS', '72tigeMUfu');
+define('CONS_BDNAME', 'fe000180_qas');
+}elseif($vFlag == 'prd'){
+define('CONS_BDHOST', 'localhost');
+define('CONS_BDUSER', 'fe000180_prd');
+define('CONS_BDPASS', '72tigeMUfu');
+define('CONS_BDNAME', 'fe000180_prd');
+}else{
 define('CONS_BDHOST', 'localhost');
 define('CONS_BDUSER', 'root');
 define('CONS_BDPASS', '');
 define('CONS_BDNAME', 'meansTravels');
+}
 
-define('C_ENCRYPTION_STRING', 'enCryptTicketPlaceIDUser');
+define('C_PREFIX_HOME',			'/meansAdmin');
+define('C_ENCRYPTION_STRING', 	'enCryptMeansPlace$#');
 
 define('C_MIN_LEVEL_ADMIN', 3);
 

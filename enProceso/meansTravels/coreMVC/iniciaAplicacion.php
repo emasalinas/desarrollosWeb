@@ -21,6 +21,7 @@ class clAplicacion{
     private $urlParametro3 		= null;
     private $urlParametro4 		= null;
     private $urlParametro5 		= null;
+	public	$userSession		= 'Sarasa';
 
 	/*--------------------------------------------------------------*/
 	// Comenzamos la aplicacion con la URL indicada
@@ -112,8 +113,9 @@ class clAplicacion{
 			
 		}else{
 			
-			$this->urlControlador 	= 'filter';
+			$this->urlControlador 	= 'index';
 			
         }
     }
+	
 }

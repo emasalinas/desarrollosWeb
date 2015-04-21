@@ -15,6 +15,7 @@
 *********************************************************************/
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
+date_default_timezone_set('America/Argentina/Buenos_Aires');
 
 /********************************************************************
 * Constantes Globales
@@ -24,7 +25,7 @@ require './includesMVC/constantesGlobales.php';
 /********************************************************************
 * Clases Globales
 *********************************************************************/
-//require '';
+require './includesMVC/clasesPDF.php';
 
 /********************************************************************
 * Variables Globales

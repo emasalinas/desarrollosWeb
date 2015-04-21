@@ -78,9 +78,9 @@ class ctrRegister extends clControlador{
 				
 			$vCallBackURL		=	$this->clSesion->mSessionGetVar('callBackURL');
 			if(isset($vCallBackURL))
-				header('Location: /meansTravels'.$vCallBackURL);
+				header('Location: '.C_PREFIX_HOME.$vCallBackURL);
 			else
-				header('Location: /meansTravels/filter/');
+				header('Location: '.C_PREFIX_HOME);
 		
 		}
 		

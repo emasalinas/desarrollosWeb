@@ -38,10 +38,10 @@ class modTravels {
 		$this->vQueryString		.= "tblMovil.modeloMovil, tblMovil.patenteMovil ";
 		$this->vQueryString		.= "FROM tblViajes ";
 		$this->vQueryString		.= "INNER JOIN tblConductores ON tblConductores.idPrincipal = tblViajes.conductorViaje ";
-		$this->vQueryString		.= "INNER JOIN tblMovil ON tblMovil.idPrincipal = tblViajes.autoViaje ";
+		$this->vQueryString		.= "INNER JOIN tblMovil ON tblMovil.idPrincipal = tblViajes.movilViaje ";
 		$this->vQueryString		.= "WHERE tblViajes.idPrincipal = '".$pIdTravel."' ";
-		$clQuery	= $this->clMysqliConn->mRealizaConsulta($this->vQueryString);
-		$arrQuery	= $this->clMysqliConn->mCrearArray();
+		$clQuery				= $this->clMysqliConn->mRealizaConsulta($this->vQueryString);
+		$arrQuery				= $this->clMysqliConn->mCrearArray();
 		return $arrQuery;
 		
 	}
@@ -145,16 +145,45 @@ class modTravels {
 	}
 	
 	/*--------------------------------------------------------------*/
-	// Metodo para obtener proveedor
+	// Metodo para obtener cond. precio
 	/*--------------------------------------------------------------*/
 	public function mObtenerPrecio($pValue){
 		
-		$this->vQueryString		 = "SELECT precioCondPago FROM tblCondicionesPago ";
-		$this->vQueryString		.= "WHERE idPrincipal = '".$pValue."' ";
+		$this->vQueryString		 = "SELECT nomPrecio, formulaPrecio FROM tblPrecios ";
+		$this->vQueryString		.= "WHERE idRelacion1 = '".$pValue."' ";
 		$clQuery	= $this->clMysqliConn->mRealizaConsulta($this->vQueryString);
-		$arrQuery	= $this->clMysqliConn->mCrearArray();
-		return $arrQuery['precioCondPago'];
+		$arrQuery	= $this->clMysqliConn->mCrearArrayMultiple();
+		return $this->mCalcularTotal($arrQuery);
 		
+	}
+	
+	/*--------------------------------------------------------------*/
+	// Metodo para obtener cond. precio
+	/*--------------------------------------------------------------*/
+	public function mCalcularTotal($arrValues){
+		
+		$vTotal = 0;
+		foreach($arrValues as $vValues){
+			if($vValues['formulaPrecio'] != NULL){
+				$vValor = substr($vValues['formulaPrecio'],1);
+				switch(substr($vValues['formulaPrecio'], 0, 1)){
+					case '*':
+						$vTotal = $vTotal * $vValor;
+					break;
+					case '+':
+						$vTotal = $vTotal + $vValor;
+					break;
+					case '-':
+						$vTotal = $vTotal - $vValor;
+					break;
+					case '/':
+						$vTotal = $vTotal / $vValor;
+					break;
+				}
+			}
+		}
+		
+		return $vTotal;
 	}
 	
 	/*--------------------------------------------------------------*/
@@ -162,12 +191,33 @@ class modTravels {
 	/*--------------------------------------------------------------*/
 	public function mInputToOutput($pArray){
 		
-		foreach($pArray as $vTravelField => $vTravelViewRow){
-			$vArray[$vTravelField] = $this->mExitField($vTravelViewRow, $vTravelField);
+		$vArray = NULL;
+		if(count($pArray)){
+			foreach($pArray as $vTravelField => $vTravelViewRow){
+				$vArray[$vTravelField] = $this->mExitField($vTravelViewRow, $vTravelField);
+			}
 		}
 		
 		return $vArray;
 		
+	}
+	
+	/*--------------------------------------------------------------*/
+	// Metodo para dejar el asiento pendiente
+	/*--------------------------------------------------------------*/
+	public function mSetAsientoEstado($pNewUser, $pStatus, $pUserActive){
+		
+		$this->vQueryString		 = 'UPDATE tblPasajeros SET ';
+		$this->vQueryString		.= 'estadoPasajero 		= '.$pStatus.', ';
+		$this->vQueryString		.= 'idRelacion2 		= '.$pNewUser.' ';
+		$this->vQueryString		.= 'WHERE idRelacion2 	= "'.$pUserActive.'"';
+		$this->vQueryString		.= 'AND estadoPasajero 	= "'.estadoAsientoPendiente.'"';
+		$clQuery				 = $this->clMysqliConn->mRealizaConsulta($this->vQueryString);
+		if($this->clMysqliConn->mysqliErrores == 1){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }
 

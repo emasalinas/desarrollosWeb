@@ -54,6 +54,7 @@ class ctrFilter extends clControlador {
 		
 		$this->entFilter  					= new entFilter();
 		$this->entFilter->arrTargets		= $this->clModelo->mObtenerCiudades();
+		$this->entFilter->actualView		= 'viewForm';
 		
 		// Cargamos la vista con todo lo que teniamos
 		$this->mCargarVista($this->nomVista);
@@ -74,15 +75,7 @@ class ctrFilter extends clControlador {
 		
 		$this->entFilter->arrTravels					= $this->clModelo->mObtenerViajes($this->entFilter->travelData);
 		
-		/*
-		$this->clSesion	= new clSesiones;
-		$this->clSesion->mSessionStart();
-		
-		$this->entFilter  					= new entFilter();
-		$this->entFilter->userSlash			= $this->clSesion->mSessionGetVar('userSlash');
-		$this->entFilter->userActive		= rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5(C_ENCRYPTION_STRING), base64_decode($this->entFilter->userSlash), MCRYPT_MODE_CBC, md5(md5(C_ENCRYPTION_STRING))), "\0");	
-		
-		*/
+		$this->entFilter->actualView		= 'viewList';
 		
 		// Cargamos la vista con todo lo que teniamos
 		$this->mCargarVista($this->nomVista);
@@ -98,6 +91,7 @@ class ctrFilter extends clControlador {
 		if($pTarget == 'citys'){
 			$this->entFilter->arrTargets 	=	 $this->clModelo->mObtenerCiudades($pValue);
 			if(count($this->entFilter->arrTargets) > 0){
+				echo '<option value="">Seleccione un destino</option>';
 				foreach($this->entFilter->arrTargets as $arrCiudades):
 					echo '<option value="'.$arrCiudades['idPrincipal'].'">'.$arrCiudades['nombreCiudad'].'</option>';
 				endforeach;

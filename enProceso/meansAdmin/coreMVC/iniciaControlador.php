@@ -47,11 +47,31 @@ class clControlador extends clMysqliQuery {
 	/*--------------------------------------------------------------*/
 	// Metodo de carga del archivo de vista
 	/*--------------------------------------------------------------*/
-	public function mCargarVista($pNombreEntidad, $pCargaHyF = true)
+	public function mCargarVista($pNombreEntidad, $pCargaHyF = true, $pShowNavBar = true)
     {	
+		$vShowNavBar = $pShowNavBar;
 		if($pCargaHyF == true) include './publicMVC/html/pageHeader.php';
         include './vistaMVC/' .  	$pNombreEntidad 	. '.php';
 		if($pCargaHyF == true) include './publicMVC/html/pageFooter.php';
+		
     }
+	
+	/*--------------------------------------------------------------*/
+	// Encriptar texto
+	/*--------------------------------------------------------------*/
+	public function mEncryptText($pText, $pUrlEncode = false){
+		$vEncode = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5(C_ENCRYPTION_STRING), $pText, MCRYPT_MODE_CBC, md5(md5(C_ENCRYPTION_STRING))));
+		if($pUrlEncode == true) $vEncode = rawurlencode(rawurlencode($vEncode));
+		return $vEncode;
+	}
+	
+	/*--------------------------------------------------------------*/
+	// Desencriptar texto
+	/*--------------------------------------------------------------*/
+	public function mDecryptText($pText, $pUrlDecode = false){
+		if($pUrlDecode == true) $pText = rawurldecode(rawurldecode($pText));
+		$vDecode = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5(C_ENCRYPTION_STRING), base64_decode($pText), MCRYPT_MODE_CBC, md5(md5(C_ENCRYPTION_STRING))), "\0");
+		return $vDecode;
+	}
 
 }

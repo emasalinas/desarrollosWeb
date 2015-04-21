@@ -54,8 +54,14 @@ class ctrLogin extends clControlador{
 		
 		$this->entLogin  					= new entLogin();
 		
+		$this->clSesion = new clSesiones;
+		$this->clSesion->mSessionStart();
+		if($this->clSesion->mSessionCheck())
+		header('Location: '.C_PREFIX_HOME.'/dashboard/');
+		
+					
 		// Cargamos la vista con todo lo que teniamos
-		$this->mCargarVista($this->nomVista);
+		$this->mCargarVista($this->nomVista, true, false);
 
     }
 	
@@ -86,27 +92,39 @@ class ctrLogin extends clControlador{
 					
 					$vCallBackURL		=	$this->clSesion->mSessionGetVar('callBackURL');
 					if(isset($vCallBackURL))
-						header('Location: /meansAdmin'.$vCallBackURL);
+						header('Location: '.C_PREFIX_HOME.$vCallBackURL);
 					else
-						header('Location: /meansAdmin/dashboard/');
-						
+						header('Location: '.C_PREFIX_HOME.'/dashboard/');
+											
 				}else{
 					
 					$this->entLogin->userData['codError']	= '500';
 					$this->entLogin->userData['descError']	= 'No tiene permisos para realizar dicha operación.';	
 					
 					// Cargamos la vista con todo lo que teniamos
-					$this->mCargarVista($this->nomVista);
+					$this->mCargarVista($this->nomVista, true, false);
 				}
 			}
 				
 		}else{
 			
 			// Cargamos la vista con todo lo que teniamos
-			$this->mCargarVista($this->nomVista);
+			$this->mCargarVista($this->nomVista, true, false);
 		}
-
     }
+	
+	/*--------------------------------------------------------------*/
+	// Metodo para cierra de sesion
+	/*--------------------------------------------------------------*/
+    public function mLogout(){	
+		
+		$this->clSesion = new clSesiones;
+		$this->clSesion->mSessionStart();
+		$this->clSesion->mSessionStop();
+		
+		header('Location: '.C_PREFIX_HOME);
+		
+	}
 	
 	
 }

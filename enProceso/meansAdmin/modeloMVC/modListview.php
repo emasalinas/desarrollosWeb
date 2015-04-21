@@ -77,9 +77,14 @@ class modListview {
 	public function mResolveJson($pFolderName, $pTableName, $pFileName){
 		
 		if($pFileName != ''){
-			$arrJson 			= file_get_contents('./publicMVC/json/'.$pFolderName.'/'.$pTableName.$pFileName.'.json');
-			$arrJsonData		= json_decode($arrJson, false);
-			return $arrJsonData;
+			try {
+				$arrJson 			= file_get_contents('./publicMVC/json/'.$pFolderName.'/'.$pTableName.$pFileName.'.json');
+				$arrJsonData		= json_decode($arrJson, false);
+				return $arrJsonData;
+			}
+			catch (Exception $e) {
+				echo $e->getMessage();
+			}		
 		}
 		
 	}

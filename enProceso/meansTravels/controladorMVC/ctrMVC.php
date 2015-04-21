@@ -35,19 +35,6 @@ class ctrMVC extends clControlador{
 	}
 	
 	/*--------------------------------------------------------------*/
-	// Metodo para pantalla principal del controlador (Sin Accion)
-	/*--------------------------------------------------------------*/
-    public function mPrincipal(){	
-		
-		$this->entMVC  					= new entMVC();
-		$this->entMVC->arrCanciones		= $this->clModelo->mCargarCanciones();
-		
-		// Cargamos la vista con todo lo que teniamos
-		$this->mCargarVista($this->nomVista);
-
-    }
-	
-	/*--------------------------------------------------------------*/
 	// Cargamos los elementos necesarios del controlador
 	/*--------------------------------------------------------------*/
 	private function mCargaElementos(){
@@ -58,5 +45,19 @@ class ctrMVC extends clControlador{
         // Realizamos la carga de modelo
         $this->clModelo = $this->mCargarModelo($this->nomModelo);
 	}
+	
+	/*--------------------------------------------------------------*/
+	// Metodo para pantalla principal del controlador (Sin Accion)
+	/*--------------------------------------------------------------*/
+    public function mPrincipal(){	
+		
+		$this->entMVC  					= new entMVC();
+		
+		// Cargamos la vista con todo lo que teniamos
+		$this->mCargarVista($this->nomVista);
+
+    }
+	
+	
 	
 }

@@ -2,12 +2,22 @@
 
 class clSesiones{
 	
+	private $clMysqliConn	= null;
+	private $vQueryString	= null;
+	
+	/*--------------------------------------------------------------*/
+	// Constructor de la clase
+	/*--------------------------------------------------------------*/
+    public function __construct(){
+		
+    }
+	
 	/*--------------------------------------------------------------*/
 	// Metodo para iniciar la sesion PHP
 	/*--------------------------------------------------------------*/
 	public static function mSessionInicializate() {
 		
-		$vSessionName 		= 'userSessionTP';
+		self::mSessionStop();
 		$vSecure 			= false;
 		$vHttpOnly 			= true;
 		
@@ -16,8 +26,7 @@ class clSesiones{
 		$vCookieParams = session_get_cookie_params(); //Obtén params de cookies actuales.
 		session_set_cookie_params($vCookieParams["lifetime"], $vCookieParams["path"], $vCookieParams["domain"], $vSecure, $vHttpOnly);
 		
-		session_name($vSessionName);
-		session_start();
+		self::mSessionStart();
 		session_regenerate_id(true);
 	}
 	
@@ -26,9 +35,10 @@ class clSesiones{
 	/*--------------------------------------------------------------*/
 	public static function mSessionStart() {
 		
-		$vSessionName 		= 'userSessionTP';
+		$vSessionName 		= 'userSessionMT';
 		session_name($vSessionName);
 		session_start();
+		//session_commit();
 	}
 	
 	/*--------------------------------------------------------------*/
@@ -36,11 +46,13 @@ class clSesiones{
 	/*--------------------------------------------------------------*/
 	public static function mSessionStop() {
 		
-		$vSessionName 		= 'userSessionTP';
+		$vSessionName 		= 'userSessionMT';
 		$_SESSION = array();
 		$vParams = session_get_cookie_params();
 		setcookie(session_name(), '', time() - 42000, $vParams["path"], $vParams["domain"], $vParams["secure"], $vParams["httponly"]);
+		session_unset();
 		session_destroy(); 
+		//session_commit();
 	}
 	
 	/*--------------------------------------------------------------*/
@@ -57,8 +69,40 @@ class clSesiones{
 	/*--------------------------------------------------------------*/
 	public static function mSessionGetVar($pVarName) {
 		
+		if(isset($_SESSION[$pVarName]))
 		return $_SESSION[$pVarName];
 		
 	}
+	
+	/*--------------------------------------------------------------*/
+	// Metodo para establecer variables de sesion
+	/*--------------------------------------------------------------*/
+	public static function mSessionCheck() {
+		
+		$vSlash = self::mSessionGetVar('userSlash');
+		if(isset($vSlash)) return true; else return false;
+		
+	}
+	
+	/*--------------------------------------------------------------*/
+	// Metodo para obtener los datos del login
+	/*--------------------------------------------------------------*/
+	public function mUserGetData($pUserSlash){
+		
+		$this->clMysqliConn 	= new clMysqliQuery();
+		
+		$this->vQueryString		 = "SELECT * FROM tblUsuarios ";
+		$this->vQueryString		.= "WHERE idPrincipal ='".$pUserSlash."' ";
+		$clQuery				= $this->clMysqliConn->mRealizaConsulta($this->vQueryString);
+		$vUserFind 				= $this->clMysqliConn->mObtenerNumeroFilas();
+		if($vUserFind > 0){
+			$arrQuery	= $this->clMysqliConn->mCrearArray();
+		}else{
+			return false;
+		}
+		return $arrQuery;	
+		
+	}
+
 }
 ?>
